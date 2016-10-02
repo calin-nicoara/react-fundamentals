@@ -1,10 +1,19 @@
 var React = require('react');
+var ReactCssTransitionGroup = require('react-addons-css-transition-group');
+
+require('../main.css');
 
 var Main = React.createClass({
     render: function () {
         return (
             <div className='main-container'>
-                {this.props.children}
+                <ReactCssTransitionGroup
+                  transitionName="appear"
+                  transitionLeaveTimeout={500}
+                  transitionEnterTimeout={500}>
+                    {React.cloneElement(this.props.children, {key: this.props.location.pathname})}
+                </ReactCssTransitionGroup>
+
             </div>
         )
     }
